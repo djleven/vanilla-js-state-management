@@ -1,0 +1,239 @@
+/**
+* Define variables
+*/
+:root {
+    --border: #888888;
+    --decor: #777777;
+    --text: #fff;
+    --text-secondary: #fefefe;
+    --dark: #343a40;
+}
+/** 
+* Core styles 
+*/
+html {
+    height: 100%;
+    font-size: 16px;
+    background: var(--dark);
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+                    Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text);
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+h1, h2 {
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+}
+
+h1.intro__heading {
+    font-size: 1.7em;
+}
+
+main {
+    padding: 2rem 1rem;
+}
+@media (min-width: 1024px) {
+    main {
+        padding: 0 15%;
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        padding: 0 10%;
+    }
+}
+
+@media (min-width: 568px) {
+    main {
+        padding: 0 7%;
+    }
+}
+main {
+    overflow: auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-color: hsla(0,0%,16%,0.80);
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+/**
+* Intro 
+*/
+.intro {
+    margin: 0 0 2rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.intro__heading {
+    font-weight: 400;
+}
+
+/**
+* Quiz
+*/
+.quiz {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    grid-gap: 2rem;
+}
+
+.quiz__decor {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.quiz__decor small {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+.quiz__decor small .header {
+    font-size: 1.3rem;
+}
+
+.quiz__decor > * {
+    display: block;
+}
+
+.quiz__decor > * + * {
+    margin-top: 0.4rem;
+}
+
+@media all and (min-width: 40rem) {
+    .quiz {
+        grid-template-columns: 4fr 1fr;
+    }
+}
+.question, .choices {
+    text-align: left;
+}
+
+.choices {
+    margin: 30px 0;
+}
+
+.submit {
+    margin: 10px
+}
+
+.submit .pure-button {
+    background-color: var(--dark);
+    color: var(text);
+}
+
+/* Button styling courtesy of Pure css framework
+==========================================================================
+Pure v1.0.1
+Copyright 2013 Yahoo!
+Licensed under the BSD License.
+https://github.com/pure-css/pure/blob/master/LICENSE.md
+==========================================================================
+*/
+
+.pure-button {
+    /* Structure */
+    display: inline-block;
+    zoom: 1;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 5px;
+}
+
+/* Firefox: Get rid of the inner focus border */
+.pure-button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+.opera-only :-o-prefocus {
+    word-spacing: -0.43em;
+}
+
+.pure-button {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 0.5em 1em;
+    color: #444; /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80); /* rgba supported */
+    border: 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.pure-button-hover,
+.pure-button:hover,
+.pure-button:focus {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+.pure-button:focus {
+    outline: 0;
+}
+.pure-button-active,
+.pure-button:active {
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+    border-color: #000;
+}
+
+.pure-button[disabled],
+.pure-button-disabled,
+.pure-button-disabled:hover,
+.pure-button-disabled:focus,
+.pure-button-disabled:active {
+    border: none;
+    background-image: none;
+    /* csslint ignore:start */
+    filter: alpha(opacity=40);
+    /* csslint ignore:end */
+    opacity: 0.40;
+    cursor: not-allowed;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.pure-button-hidden {
+    display: none;
+}
+
+.pure-button-primary,
+.pure-button-selected,
+a.pure-button-primary,
+a.pure-button-selected {
+    background-color: rgb(0, 120, 231);
+    color: #fff;
+}
