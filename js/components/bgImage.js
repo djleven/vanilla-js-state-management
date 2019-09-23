@@ -15,13 +15,19 @@ export default class BgImage extends Component {
      * React to state changes and render the component's HTML
      *
      * Render the background image
-     * Set body min-height to window size height to ensure we don't get any white space in bg
+     * Set body min-height to window size height to minimise chances of getting white space in bg
      *
      * @returns {void}
      */
     render() {
         if (store.state.questions.length) {
-            this.element.style.background = `url('${store.state.currentQuestion.img}') center center no-repeat`
+            let imgUrl
+            if(store.state.score.isGameOver) {
+                imgUrl = store.state.results[store.state.score.scoreLevel].img
+            } else {
+                imgUrl = store.state.currentQuestion.img
+            }
+            this.element.style.background = `url('${imgUrl}') center center no-repeat`
             this.element.style.backgroundSize = 'cover'
             this.element.style.minHeight = `${store.state.winHeight}px`
         }

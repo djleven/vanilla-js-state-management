@@ -27,3 +27,10 @@ export function httpRequest (payload) {
         xhr.send()
     })
 }
+
+export function getScorePercentage () {
+    const score = store.state.score
+
+    return ((score.totalAwardedPoints / score.totalPossiblePoints) * 100).toFixed(2)
+
+}

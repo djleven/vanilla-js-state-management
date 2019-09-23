@@ -1,4 +1,5 @@
 import Question from '../models/Question.js'
+import Score from '../models/Score.js'
 
 export default {
     loadQuestions(state, payload) {
@@ -24,21 +25,39 @@ export default {
             Object.assign(new Question(), state.questions[state.currentIndex])
     },
     updateTotalPossiblePoints(state, payload) {
-        state.totalPossiblePoints += payload
+        state.score.totalPossiblePoints += payload
     },
     updateTotalAwardedPoints(state, payload) {
-        state.totalAwardedPoints += payload
+        state.score.totalAwardedPoints += payload
     },
-    resetTotalPossiblePoints(state) {
-        state.totalPossiblePoints = 0
-    },
-    resetTotalAwardedPoints(state) {
-        state.totalAwardedPoints = 0
+    resetScore(state) {
+        state.score = Object.assign(state.score, new Score())
     },
     heightResize (state, height) {
         state.winHeight = height
     },
-    endGame (state, endGame = true) {
-        state.isGameOver = endGame
+    loadEvaluationResults(state, payload) {
+        payload.forEach( (q) => {
+            state.results.push(q)
+        })
+    },
+    /**
+     * Evaluate the score percentage, commit the score level and end game
+     */
+    setScoreLevel (state, percentageScore) {
+        const lowEndBreakpoint = 33.5
+        const highEndBreakpoint = 66.5
+        let scoreLevel = null
+        percentageScore = parseInt(percentageScore)
+
+        if(percentageScore < lowEndBreakpoint) {
+            scoreLevel = 0
+        } else if (percentageScore >= lowEndBreakpoint && percentageScore < highEndBreakpoint) {
+            scoreLevel = 1
+        } else if (percentageScore >= highEndBreakpoint) {
+            scoreLevel = 2
+        }
+
+        state.score = Object.assign(state.score, { scoreLevel, isGameOver: true })
     }
 }
