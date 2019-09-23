@@ -130,7 +130,7 @@ export default class Answers extends Component {
         this.element.innerHTML = ''
 
         // If game is over add a button to restart it
-        if(store.state.isGameOver) {
+        if(store.state.score.isGameOver) {
             let button = document.createElement('button')
             button.onclick = this.restartGame
             button.innerHTML = 'Restart Quiz'
@@ -144,6 +144,7 @@ export default class Answers extends Component {
 
             this.generateMultipleSelectionElements()
 
+            // Add a submit button since it's a multiple checkbox selection
             let button = document.createElement('button')
             let div = document.createElement("div")
             div.className ='submit'

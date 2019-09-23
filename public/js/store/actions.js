@@ -1,4 +1,4 @@
-import { httpRequest } from '../helpers.js'
+import { httpRequest, getScorePercentage } from '../helpers.js'
 
 export default {
     getQuestions(context) {
@@ -27,14 +27,38 @@ export default {
             context.commit('updateIndex')
             context.commit('updateQuestion')
         } else {
-            context.commit('endGame')
+            // end game
+            // if we already have the results in the store don't request them again (ex: game restarted scenario)
+            if(!context.state.results.length) {
+                context.dispatch('getEndResult')
+            } else {
+                context.dispatch('initEvaluation')
+            }
         }
     },
+    getEndResult(context) {
+        httpRequest({
+            method: 'GET',
+            url: 'https://proto.io/en/jobs/candidate-questions/result.json'
+        })
+            .then((data) => {
+                data = JSON.parse(data)
+                context.commit('loadEvaluationResults', data.results)
+                context.dispatch('initEvaluation')
+            })
+            .catch((err) => {
+                console.error('Augh, there was an error!', err)
+            })
+    },
+    initEvaluation(context) {
+        context.commit(
+            'setScoreLevel',
+            getScorePercentage()
+        )
+    },
     restartGame(context) {
-        context.commit('resetTotalPossiblePoints')
-        context.commit('resetTotalAwardedPoints')
         context.commit('updateIndex', true)
         context.commit('updateQuestion')
-        context.commit('endGame', false)
+        context.commit('resetScore')
     }
 }
