@@ -29,6 +29,12 @@ export default {
         } else {
             context.commit('endGame')
         }
+    },
+    restartGame(context) {
+        context.commit('resetTotalPossiblePoints')
+        context.commit('resetTotalAwardedPoints')
+        context.commit('updateIndex', true)
+        context.commit('updateQuestion')
+        context.commit('endGame', false)
     }
-
 }

@@ -56,7 +56,18 @@ export default class Answers extends Component {
      * @returns {void}
      */
     toggleCheckboxLabelSelection (event) {
+
         event.target.parentElement.classList.toggle('pure-button-primary')
+    }
+
+    /**
+     * Restart the game
+     *
+     * @returns {void}
+     */
+    restartGame () {
+
+        store.dispatch('restartGame')
     }
 
     /**
@@ -118,8 +129,14 @@ export default class Answers extends Component {
 
         this.element.innerHTML = ''
 
-        // If game is over do something
+        // If game is over add a button to restart it
         if(store.state.isGameOver) {
+            let button = document.createElement('button')
+            button.onclick = this.restartGame
+            button.innerHTML = 'Restart Quiz'
+            button.className ='pure-button'
+            this.element.appendChild(button)
+
             return
         }
 

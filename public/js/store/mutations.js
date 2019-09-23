@@ -10,8 +10,12 @@ export default {
         state.meta =
             Object.assign(state.meta, payload)
     },
-    updateIndex(state) {
-        state.currentIndex++
+    updateIndex(state, reset = false) {
+        if(reset) {
+            state.currentIndex = 0
+        } else {
+            state.currentIndex++
+        }
     },
     updateQuestion(state) {
         // object assign question with it's model to ensure we have all needed properties
@@ -25,10 +29,16 @@ export default {
     updateTotalAwardedPoints(state, payload) {
         state.totalAwardedPoints += payload
     },
+    resetTotalPossiblePoints(state) {
+        state.totalPossiblePoints = 0
+    },
+    resetTotalAwardedPoints(state) {
+        state.totalAwardedPoints = 0
+    },
     heightResize (state, height) {
         state.winHeight = height
     },
-    endGame (state) {
-        state.isGameOver = true
+    endGame (state, endGame = true) {
+        state.isGameOver = endGame
     }
 }
