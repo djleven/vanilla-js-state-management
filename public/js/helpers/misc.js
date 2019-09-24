@@ -24,7 +24,13 @@ export function httpRequest (payload) {
     })
 }
 
-// This is essentially a store getter..
+/**
+ * Return the current user score as a two decimal percentage
+ *
+ * (This is essentially a store getter..)
+ *
+ * @returns string
+ */
 export function getScorePercentage () {
     const score = store.state.score
 
@@ -56,4 +62,67 @@ export function getCorrectAnswerCaptions () {
     }
 
     return correctAnswers
+}
+/**
+ * Get the required app images to preload, and preload them for a smoother user experience.
+ *
+ * This function will be called from two places in the app's lifecycle:
+ *
+ * 1-) During the app's initialisation from the getQuestions() request.
+ * In this case, the question images will be processed.
+ * Also, the loadResultsNext will be true which will then call the getEndResult() request.
+ *
+ * 2-) After the getEndResult() request is processed successfully.
+ * In this case, the results images will be processed.
+ * And so the loadResultsNext will be false.
+ *
+ * @param arrayWithImages array      array object which includes the images to process
+ * @param loadResultsNext boolean    whether to call getEndResult() upon preload completion
+ *
+ * @returns {void}
+ */
+export function getImagesToPreload (arrayWithImages, loadResultsNext = false) {
+    let imageType = 'question'
+    let imgsToPreload = []
+    // extract images to preload from array object
+    arrayWithImages.forEach( (item) => {
+        imgsToPreload.push(item.img)
+    })
+    if(loadResultsNext) {
+        imageType = 'results'
+    }
+    preloadImages(imgsToPreload, () => {
+        console.log(`All ${imageType} images were loaded`);
+        if(loadResultsNext) {
+            console.log(`Proceed to load ${imageType}`);
+            store.dispatch('getEndResult')
+        }
+    });
+}
+
+/**
+ * Preload images
+ *
+ * @param urls                     array      array object of image url's to preload
+ * @param allImagesLoadedCallback  function   callback function on preload completion
+ *
+ * @returns string
+ */
+function preloadImages (urls, allImagesLoadedCallback) {
+    let loadedCounter = 0;
+    let toBeLoadedNumber = urls.length;
+    urls.forEach((url) => {
+        preloadImage(url, () => {
+            loadedCounter++;
+            console.log('Number of loaded images: ' + loadedCounter);
+            if(loadedCounter == toBeLoadedNumber){
+                allImagesLoadedCallback();
+            }
+        });
+    });
+    function preloadImage(url, anImageLoadedCallback){
+        let img = new Image();
+        img.src = url;
+        img.onload = anImageLoadedCallback;
+    }
 }

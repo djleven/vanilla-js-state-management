@@ -17,10 +17,17 @@ export default class Header extends Component {
      * @returns {void}
      */
     render() {
-
+        let title = 'Welcome to the Game of Thrones Quiz'
+        let description = 'If this message persists, you may not have an active internet connection'
+        if(store.state.meta.title && store.state.meta.description) {
+            title = store.state.meta.title
+        }
+        if(store.state.meta.description) {
+            description = store.state.meta.description
+        }
         // Render the header
         this.element.innerHTML =
-            `<h1 class="intro__heading">${store.state.meta.title}</h1>
-             <h4 class="intro__heading">${store.state.meta.description}</h4>`
+            `<h1 class="intro__heading">${title}</h1>
+             <h4 class="intro__heading">${description}</h4>`
     }
 }
