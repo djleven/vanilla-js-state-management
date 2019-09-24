@@ -136,11 +136,6 @@ main {
     margin: 10px
 }
 
-.submit .pure-button {
-    background-color: var(--dark);
-    color: var(text);
-}
-
 /* Button styling courtesy of Pure css framework
 ==========================================================================
 Pure v1.0.1

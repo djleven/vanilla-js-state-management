@@ -16,19 +16,7 @@ export const answerEvents = {
         const points = question.points
 
         if (question.question_type === 'mutiplechoice-multiple') {
-            const checkBoxes = document.getElementsByTagName('input')
-            answerGiven = []
-
-            for (let checkBox of checkBoxes) {
-                if (checkBox.checked) {
-                    answerGiven.push(checkBox.value)
-                }
-            }
-            // TODO: Improve validation UI with disabled submit button if none selected instead of alerting
-            if (!answerGiven.length) {
-                alert('You must select at least one option')
-                return
-            }
+            answerGiven = getCheckedCheckboxes()
 
         } else {
             answerGiven = event.target.value
@@ -42,7 +30,7 @@ export const answerEvents = {
         store.commit('updateLastAnswerWasCorrect', answerIsCorrect)
         store.commit('toggleShowCorrectAnswer')
 
-        setTimeout(function(){
+        setTimeout(()=> {
             store.commit('toggleShowCorrectAnswer')
             store.dispatch('moveToNextQuestion')
         }, 3000)
@@ -50,14 +38,21 @@ export const answerEvents = {
     },
 
     /**
-     * Toggle the label / button of the selected checkbox
+     * Multiple selection checkbox click handler
      *
      * @param event object       onclick event object
      *
      * @returns {void}
      */
-    toggleCheckboxLabelSelection(event) {
+    checkboxSelectionHandler(event) {
 
+        const answerGiven = getCheckedCheckboxes()
+        const submitButton = document.querySelector('button.submit')
+
+        // Set the submit button's disabled property depending on if at least one checkbox is checked or not
+        submitButton.disabled = !answerGiven.length
+
+        // Toggle the label / button of the selected checkbox
         event.target.parentElement.classList.toggle('pure-button-primary')
     },
 
@@ -74,4 +69,22 @@ export const answerEvents = {
 
 export function handleResize () {
     store.commit('heightResize', window.innerHeight)
+}
+
+/**
+ * Get the user's checked checkboxes
+ *
+ * @returns array
+ */
+function getCheckedCheckboxes () {
+    const checkBoxes = document.getElementsByTagName('input')
+    let answerGiven = []
+
+    for (let checkBox of checkBoxes) {
+        if (checkBox.checked) {
+            answerGiven.push(checkBox.value)
+        }
+    }
+
+    return answerGiven
 }
