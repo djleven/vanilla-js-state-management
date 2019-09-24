@@ -26,7 +26,7 @@ export default class Answers extends Component {
             let element = document.createElement('input')
             newlabel.innerHTML = question.possible_answers[index].caption
             newlabel.className ='pure-button'
-            element.onclick = answerEvents.toggleCheckboxLabelSelection
+            element.onclick = answerEvents.checkboxSelectionHandler
             element.type = 'checkbox'
             element.style.display = 'none'
             element.value = question.possible_answers[index].a_id
@@ -62,8 +62,9 @@ export default class Answers extends Component {
         let div = document.createElement("div")
         div.className ='submit'
         button.onclick = answerEvents.evaluateAnswer
+        button.disabled = true
         button.innerHTML = 'Submit'
-        button.className ='pure-button'
+        button.className ='submit pure-button pure-button-primary'
         div.appendChild(button);
         this.element.appendChild(div)
     }
