@@ -31,3 +31,29 @@ export function getScorePercentage () {
     return ((score.totalAwardedPoints / score.totalPossiblePoints) * 100).toFixed(2)
 
 }
+
+/**
+ * Return the correct answer caption(s)
+ *
+ * @returns array
+ */
+export function getCorrectAnswerCaptions () {
+    const question = store.state.currentQuestion
+    let correctAnswer = question.correct_answer
+
+    // convert correctAnswer into array if it's a number or a boolean
+    if(typeof correctAnswer === 'number' || typeof correctAnswer === 'boolean'){
+        correctAnswer = [correctAnswer]
+    }
+
+    let correctAnswers = []
+
+    // loop through the possible answers and gather the correct one(s)
+    for (let answer of question.possible_answers) {
+        if (correctAnswer.includes(answer.a_id)) {
+            correctAnswers.push(answer.caption)
+        }
+    }
+
+    return correctAnswers
+}

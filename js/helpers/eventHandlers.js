@@ -10,6 +10,8 @@ export const answerEvents = {
      */
     evaluateAnswer(event) {
         let answerGiven
+        let answerIsCorrect = false
+
         const question = store.state.currentQuestion
         const points = question.points
 
@@ -31,11 +33,20 @@ export const answerEvents = {
         } else {
             answerGiven = event.target.value
         }
+        // if answer given is correct commit points
         if (answerGiven.toString() === question.correct_answer.toString()) {
             store.commit('updateTotalAwardedPoints', points)
+            answerIsCorrect = true
         }
+        store.commit('updateTotalPossiblePoints', points)
+        store.commit('updateLastAnswerWasCorrect', answerIsCorrect)
+        store.commit('toggleShowCorrectAnswer')
 
-        store.dispatch('moveToNextQuestion', points)
+        setTimeout(function(){
+            store.commit('toggleShowCorrectAnswer')
+            store.dispatch('moveToNextQuestion')
+        }, 3000)
+
     },
 
     /**

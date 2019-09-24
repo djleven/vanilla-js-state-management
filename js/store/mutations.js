@@ -59,5 +59,11 @@ export default {
         }
 
         state.score = Object.assign(state.score, { scoreLevel, isGameOver: true })
+    },
+    toggleShowCorrectAnswer(state) {
+        state.showCorrectAnswer = !state.showCorrectAnswer
+    },
+    updateLastAnswerWasCorrect(state, lastAnswerWasCorrect) {
+        state.score.lastAnswerWasCorrect = lastAnswerWasCorrect
     }
 }

@@ -8,6 +8,7 @@ export default class Quiz {
                      meta = {},
                      results = [],
                      score = new Score(),
+                     showCorrectAnswer = false,
                      winHeight = null
                  } = {}) {
         this.questions = questions
@@ -16,6 +17,7 @@ export default class Quiz {
         this.meta = meta
         this.results = results
         this.score = score
+        this.showCorrectAnswer = showCorrectAnswer
         this.winHeight = winHeight
     }
 }
