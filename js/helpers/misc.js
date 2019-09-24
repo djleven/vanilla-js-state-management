@@ -1,8 +1,4 @@
-import store from './store/index.js';
-
-export function handleResize () {
-    store.commit('heightResize', window.innerHeight)
-}
+import store from '../store/index.js';
 
 export function httpRequest (payload) {
     return new Promise( (resolve, reject) => {
@@ -28,6 +24,7 @@ export function httpRequest (payload) {
     })
 }
 
+// This is essentially a store getter..
 export function getScorePercentage () {
     const score = store.state.score
 

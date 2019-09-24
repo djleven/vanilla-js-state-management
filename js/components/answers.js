@@ -1,5 +1,6 @@
 import Component from '../lib/component.js'
 import store from '../store/index.js'
+import { answerEvents } from '../helpers/eventHandlers.js';
 
 export default class Answers extends Component {
 
@@ -9,65 +10,6 @@ export default class Answers extends Component {
             store,
             element: document.querySelector('.choices')
         })
-    }
-
-    /**
-     * Evaluate the answer given, attribute point totals and move to the next question
-     *
-     * @param event object       onclick event object
-     *
-     * @returns {void}
-     */
-    evaluateAnswer (event) {
-        let answerGiven
-        const question = store.state.currentQuestion
-        const points = question.points
-
-        if (question.question_type === 'mutiplechoice-multiple') {
-            const checkBoxes = document.getElementsByTagName('input')
-            answerGiven = []
-
-            for (let checkBox of checkBoxes) {
-                if(checkBox.checked) {
-                    answerGiven.push(checkBox.value)
-                }
-            }
-            // TODO: Improve validation UI with disabled submit button if none selected instead of alerting
-            if(!answerGiven.length) {
-                alert('You must select at least one option')
-                return
-            }
-
-        } else {
-            answerGiven = event.target.value
-        }
-        if(answerGiven.toString() === question.correct_answer.toString()) {
-            store.commit('updateTotalAwardedPoints', points)
-        }
-
-        store.dispatch('moveToNextQuestion', points)
-    }
-
-    /**
-     * Toggle the label / button of the selected checkbox
-     *
-     * @param event object       onclick event object
-     *
-     * @returns {void}
-     */
-    toggleCheckboxLabelSelection (event) {
-
-        event.target.parentElement.classList.toggle('pure-button-primary')
-    }
-
-    /**
-     * Restart the game
-     *
-     * @returns {void}
-     */
-    restartGame () {
-
-        store.dispatch('restartGame')
     }
 
     /**
@@ -84,7 +26,7 @@ export default class Answers extends Component {
             let element = document.createElement('input')
             newlabel.innerHTML = question.possible_answers[index].caption
             newlabel.className ='pure-button'
-            element.onclick = this.toggleCheckboxLabelSelection
+            element.onclick = answerEvents.toggleCheckboxLabelSelection
             element.type = 'checkbox'
             element.style.display = 'none'
             element.value = question.possible_answers[index].a_id
@@ -102,7 +44,7 @@ export default class Answers extends Component {
 
         question.possible_answers.forEach((q, index) => {
             let element = document.createElement('button');
-            element.onclick = this.evaluateAnswer
+            element.onclick = answerEvents.evaluateAnswer
             element.className ='pure-button'
             element.innerHTML = question.possible_answers[index].caption
             element.value = question.possible_answers[index].a_id
@@ -132,7 +74,7 @@ export default class Answers extends Component {
         // If game is over add a button to restart it
         if(store.state.score.isGameOver) {
             let button = document.createElement('button')
-            button.onclick = this.restartGame
+            button.onclick = answerEvents.restartGame
             button.innerHTML = 'Restart Quiz'
             button.className ='pure-button'
             this.element.appendChild(button)
@@ -148,7 +90,7 @@ export default class Answers extends Component {
             let button = document.createElement('button')
             let div = document.createElement("div")
             div.className ='submit'
-            button.onclick = this.evaluateAnswer
+            button.onclick = answerEvents.evaluateAnswer
             button.innerHTML = 'Submit'
             button.className ='pure-button'
             div.appendChild(button);
