@@ -1,4 +1,4 @@
-import { httpRequest, getScorePercentage } from '../helpers.js'
+import { httpRequest, getScorePercentage } from '../helpers/misc.js'
 
 export default {
     getQuestions(context) {
