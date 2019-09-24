@@ -53,6 +53,35 @@ export default class Answers extends Component {
     }
 
     /**
+     * Create a submit button for multiple selection questions
+     *
+     * @returns {void}
+     */
+    createMultipleSelectionSubmitButton () {
+        let button = document.createElement('button')
+        let div = document.createElement("div")
+        div.className ='submit'
+        button.onclick = answerEvents.evaluateAnswer
+        button.innerHTML = 'Submit'
+        button.className ='pure-button'
+        div.appendChild(button);
+        this.element.appendChild(div)
+    }
+
+    /**
+     * Create a restart quiz button
+     *
+     * @returns {void}
+     */
+    createRestartQuizButton () {
+        let button = document.createElement('button')
+        button.onclick = answerEvents.restartGame
+        button.innerHTML = 'Restart Quiz'
+        button.className ='pure-button'
+        this.element.appendChild(button)
+    }
+
+    /**
      * React to state changes and render the component's HTML
      *
      * @returns {void}
@@ -73,11 +102,7 @@ export default class Answers extends Component {
 
         // If game is over add a button to restart it
         if(store.state.score.isGameOver) {
-            let button = document.createElement('button')
-            button.onclick = answerEvents.restartGame
-            button.innerHTML = 'Restart Quiz'
-            button.className ='pure-button'
-            this.element.appendChild(button)
+            this.createRestartQuizButton()
 
             return
         }
@@ -85,16 +110,8 @@ export default class Answers extends Component {
         if (question.question_type === 'mutiplechoice-multiple') {
 
             this.generateMultipleSelectionElements()
-
             // Add a submit button since it's a multiple checkbox selection
-            let button = document.createElement('button')
-            let div = document.createElement("div")
-            div.className ='submit'
-            button.onclick = answerEvents.evaluateAnswer
-            button.innerHTML = 'Submit'
-            button.className ='pure-button'
-            div.appendChild(button);
-            this.element.appendChild(div)
+            this.createMultipleSelectionSubmitButton()
 
         } else {
             this.generateSingleSelectionElements()
