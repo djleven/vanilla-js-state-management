@@ -20,9 +20,9 @@ export default {
                 console.error('Augh, there was an error!', err)
             })
     },
-    moveToNextQuestion(context, points) {
+    moveToNextQuestion(context) {
         const currentIndex = context.state.currentIndex
-        context.commit('updateTotalPossiblePoints', points)
+
         if( currentIndex + 1 < context.state.questions.length) {
             context.commit('updateIndex')
             context.commit('updateQuestion')

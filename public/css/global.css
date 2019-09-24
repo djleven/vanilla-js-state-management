@@ -124,7 +124,7 @@ main {
         grid-template-columns: 4fr 1fr;
     }
 }
-.question, .choices {
+.content, .choices {
     text-align: left;
 }
 

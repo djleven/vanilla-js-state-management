@@ -19,6 +19,7 @@ export default class Question extends Component {
      */
     render() {
         const pointValueText = 'point question'
+        // reset component output
         this.element.innerHTML = ''
         // If there are no questions to show, render the status instead
         if(store.state.questions.length === 0) {
@@ -27,7 +28,7 @@ export default class Question extends Component {
         }
 
         // If game is over show the evaluation result instead of a question
-        // Showcase an example of component reuse - score component
+        // Showcase an example of component reuse - score component (it's a little forced but what the hey)
         if(store.state.score.isGameOver) {
             const scoreComponent = new Score('.question', true)
             scoreComponent.render()
@@ -38,5 +39,6 @@ export default class Question extends Component {
         this.element.innerHTML =
             `<h2>${store.state.currentQuestion.title}</h2>
              <small>${store.state.currentQuestion.points} ${pointValueText}</small>`
+
     }
 }

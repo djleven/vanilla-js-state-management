@@ -106,16 +106,20 @@ export default class Answers extends Component {
 
             return
         }
+        // Don't show answer options after submission when displaying the answer
+        if(!store.state.showCorrectAnswer) {
 
-        if (question.question_type === 'mutiplechoice-multiple') {
+            if (question.question_type === 'mutiplechoice-multiple') {
 
-            this.generateMultipleSelectionElements()
-            // Add a submit button since it's a multiple checkbox selection
-            this.createMultipleSelectionSubmitButton()
+                this.generateMultipleSelectionElements()
+                // Add a submit button since it's a multiple checkbox selection
+                this.createMultipleSelectionSubmitButton()
 
-        } else {
-            this.generateSingleSelectionElements()
+            } else {
+                this.generateSingleSelectionElements()
+            }
         }
+
 
     }
 };
