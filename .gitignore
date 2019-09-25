@@ -3,3 +3,5 @@ node_modules
 *.log
 npm-debug.*
 .idea/
+# Jest test coverage reports
+/tests/coverage-report

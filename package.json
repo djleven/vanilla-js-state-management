@@ -5,11 +5,44 @@
   "main": "index.js",
   "scripts": {
     "serve": "node server.js",
-    "test": "test"
+    "test": "jest --verbose",
+    "testCoverage": "jest --coverage"
   },
   "author": "djleven",
   "license": "ISC",
   "dependencies": {
     "server": "^1.0.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/public/js/**/*.js"
+    ],
+    "coverageDirectory": "<rootDir>/tests/coverage-report",
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js",
+      "<rootDir>/**/?(*.)(spec|test).js"
+    ],
+    "resolver": "jest-pnp-resolver",
+    "testEnvironment": "jsdom",
+    "testURL": "http://localhost",
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$",
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/public/js/$1",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ]
   }
 }
