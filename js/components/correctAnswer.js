@@ -2,6 +2,8 @@ import Component from '../lib/component.js'
 import store from '../store/index.js'
 
 import { getCorrectAnswerCaptions } from '../helpers/misc.js';
+import { prefixCommentPool, correctAnswerText } from '../helpers/constants.js'
+
 
 export default class CorrectAnswer extends Component {
 
@@ -22,15 +24,9 @@ export default class CorrectAnswer extends Component {
 
         let preFixComments
         if(store.state.score.lastAnswerWasCorrect) {
-            preFixComments = [
-                'Nice Job!', 'Well Done!', 'Looking sharp!', 'Right on!', 'Yup, you got it!',
-                'You really know your stuff!', 'That\'s correct!', 'Good Answer!'
-            ]
+            preFixComments = prefixCommentPool.correct
         } else {
-            preFixComments = [
-                'Nope, wrong answer', 'No, that\'s not it', 'You\'re going to have to do better',
-                'Sadly, no', 'Are you sure you\'ve seen this show?', 'No, try again', 'Wrong, wrong'
-            ]
+            preFixComments =prefixCommentPool.incorrect
         }
 
         this.insertTextNodeElement(
@@ -45,9 +41,8 @@ export default class CorrectAnswer extends Component {
      */
     displayCorrectAnswer () {
         let correctAnswer = getCorrectAnswerCaptions().join(", ")
-        const answerText = 'The correct answer is'
 
-        this.insertTextNodeElement(`${answerText} ${correctAnswer}`)
+        this.insertTextNodeElement(`${correctAnswerText} ${correctAnswer}`)
     }
 
     /**
