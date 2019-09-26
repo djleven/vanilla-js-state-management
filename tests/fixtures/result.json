@@ -1,0 +1,58 @@
+
+{
+
+	"quiz_id": 12,
+
+	"results": [
+
+		{
+
+			"r_id": 1,
+
+			"minpoints": 0,
+
+			"maxpoints": 33,
+
+			"title": "Not good.",
+
+			"message": "You are lucky we don't feed your score to the hounds.",
+
+			"img": "./imgs/ramsay.jpg"
+
+		},
+
+		{
+
+			"r_id": 2,
+
+			"minpoints": 34,
+
+			"maxpoints": 66,
+
+			"title": "An average attempt",
+
+			"message": "Sansa isn't very impressed by your lack of Season 6 knowledge.",
+
+			"img": "./imgs/sansa.png"
+
+		},
+
+		{
+
+			"r_id": 3,
+
+			"minpoints": 67,
+
+			"maxpoints": 100,
+
+			"title": "Dragonfire!",
+
+			"message": "Daenerys likes your score. You may live.",
+
+			"img": "./imgs/daenerys.jpg"
+
+		}
+
+	]
+
+}
