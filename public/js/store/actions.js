@@ -89,7 +89,7 @@ export default {
         )
     },
     restartGame(context) {
-        context.commit('updateIndex', true)
+        context.commit('updateIndex', 0)
         context.commit('updateQuestion')
         context.commit('resetScore')
     }
