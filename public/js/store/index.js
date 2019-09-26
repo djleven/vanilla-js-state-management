@@ -6,5 +6,5 @@ import mutations from './mutations.js';
 export default new Store({
     actions,
     mutations,
-    state: new Quiz(),
-});
+    state: new Quiz()
+})
