@@ -11,9 +11,9 @@ export default {
         state.meta =
             Object.assign(state.meta, payload)
     },
-    updateIndex(state, reset = false) {
-        if(reset) {
-            state.currentIndex = 0
+    updateIndex(state, index = null) {
+        if(typeof index === 'number') {
+            state.currentIndex = index
         } else {
             state.currentIndex++
         }
