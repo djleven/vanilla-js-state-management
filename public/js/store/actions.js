@@ -1,4 +1,4 @@
-import { httpRequest, getScorePercentage, getImagesToPreload } from '../helpers/misc.js'
+import { httpRequest, getScorePercentage, getImagesToPreload } from '../misc/helpers.js'
 
 export default {
     getQuestions(context) {

@@ -1,12 +1,12 @@
 import store from '../../public/js/store/index'
 import App from '../../public/js/App'
 import {fullBodyHtml} from '../mocks/html'
-import {getCorrectAnswerCaptions} from "../../public/js/helpers/misc"
+import {getCorrectAnswerCaptions} from "../../public/js/misc/helpers"
 import {
     prefixCommentPool,
     correctAnswerText,
     elementClasses
-} from '../../public/js/helpers/constants.js'
+} from '../../public/js/misc/constants.js'
 
 export function loadQuestionTestSetup (quizQuestions) {
 

@@ -12,7 +12,7 @@ import {
     hasAppropriateCorrectAnswerClass,
     isValidEvaluationCommentRendered
 } from './helperFunctions.js'
-import {elementClasses} from "../../public/js/helpers/constants";
+import {elementClasses} from "../../public/js/misc/constants";
 
 const quizQuestions = [
     {

@@ -1,12 +1,12 @@
 import Component from '../lib/component.js'
 import store from '../store/index.js'
 
-import { getCorrectAnswerCaptions } from '../helpers/misc.js';
+import { getCorrectAnswerCaptions } from '../misc/helpers.js';
 import {
     prefixCommentPool,
     correctAnswerText,
     elementClasses
-} from '../helpers/constants.js'
+} from '../misc/constants.js'
 
 export default class CorrectAnswer extends Component {
 

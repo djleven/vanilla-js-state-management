@@ -13,7 +13,6 @@ import {
     isValidEvaluationCommentRendered
 } from './helperFunctions.js'
 
-
 const quizQuestions = [
     {
 

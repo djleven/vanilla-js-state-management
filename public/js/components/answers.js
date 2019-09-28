@@ -1,7 +1,7 @@
 import Component from '../lib/component.js'
 import store from '../store/index.js'
-import { answerEvents } from '../helpers/eventHandlers.js';
-import { elementClasses } from '../helpers/constants.js'
+import { answerEvents } from '../misc/eventHandlers.js';
+import { elementClasses } from '../misc/constants.js'
 
 export default class Answers extends Component {
 

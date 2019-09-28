@@ -1,6 +1,6 @@
 import Component from '../lib/component.js'
 import store from '../store/index.js'
-import { getScorePercentage } from '../helpers/misc.js'
+import { getScorePercentage } from '../misc/helpers.js'
 
 export default class Score extends Component {
     constructor(mountToClass = '.points', renderWithEvaluation = false) {
