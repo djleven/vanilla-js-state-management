@@ -20,14 +20,9 @@ export default class CorrectAnswer extends Component {
      *
      * @returns {void}
      */
-    displayCorrectAnswerPrefix () {
+    displayCorrectAnswerPrefix (evaluationResult) {
 
-        let preFixComments
-        if(store.state.score.lastAnswerWasCorrect) {
-            preFixComments = prefixCommentPool.correct
-        } else {
-            preFixComments =prefixCommentPool.incorrect
-        }
+        const preFixComments = prefixCommentPool[evaluationResult]
 
         this.insertTextNodeElement(
             preFixComments[Math.floor(Math.random() * preFixComments.length)]
@@ -39,20 +34,29 @@ export default class CorrectAnswer extends Component {
      *
      * @returns {void}
      */
-    displayCorrectAnswer () {
+    displayCorrectAnswer (evaluationResult) {
+
         let correctAnswer = getCorrectAnswerCaptions().join(", ")
 
-        this.insertTextNodeElement(`${correctAnswerText} ${correctAnswer}`)
+        this.insertTextNodeElement(`${correctAnswerText} ${correctAnswer}`, evaluationResult)
     }
 
     /**
      * Create an element, append a text node and insert it into the component's mount point
      *
+     * @param text          string   text node to append to element
+     * @param elementClass  string   html element class
+     * @param element       string   html element tag
+     * @param insertBefore  boolean  insert element before (true) or after (false)
+     *
      * @returns {void}
      */
-    insertTextNodeElement (text, element = 'h3', insertBefore = false) {
+    insertTextNodeElement (text, elementClass = null, element = 'h3', insertBefore = false) {
 
         let newElement = document.createElement(element);
+        if(elementClass) {
+            newElement.className = elementClass
+        }
         text = document.createTextNode(text);
         newElement.appendChild(text);
 
@@ -74,8 +78,9 @@ export default class CorrectAnswer extends Component {
         this.element.innerHTML = ''
         // Show the correct answer after submission (during the brief showCorrectAnswer time frame)
         if(store.state.showCorrectAnswer) {
-            this.displayCorrectAnswerPrefix()
-            this.displayCorrectAnswer()
+            const evaluationResult = store.state.score.lastAnswerWasCorrect ? 'correct' : 'incorrect'
+            this.displayCorrectAnswerPrefix(evaluationResult)
+            this.displayCorrectAnswer(evaluationResult)
         }
     }
 }
