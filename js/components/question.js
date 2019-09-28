@@ -1,6 +1,7 @@
 import Component from '../lib/component.js'
 import store from '../store/index.js'
 import Score from './score.js'
+import { getQuestionTypeLabel } from '../misc/helpers.js'
 
 export default class Question extends Component {
 
@@ -18,7 +19,6 @@ export default class Question extends Component {
      * @returns {void}
      */
     render() {
-        const pointValueText = 'point question'
         // reset component output
         this.element.innerHTML = ''
         // If there are no questions to show, render the status instead
@@ -27,6 +27,7 @@ export default class Question extends Component {
             return
         }
 
+        const pointValueText = `point ${getQuestionTypeLabel()} question`
         // If game is over show the evaluation result instead of a question
         // Showcase an example of component reuse - score component (it's a little forced but what the hey)
         if(store.state.score.isGameOver) {
