@@ -1,4 +1,5 @@
 import store from '../store/index.js';
+import { questionTypeLabel } from '../misc/constants.js'
 
 export function httpRequest (payload) {
     return new Promise( (resolve, reject) => {
@@ -125,4 +126,24 @@ function preloadImages (urls, allImagesLoadedCallback) {
         img.src = url;
         img.onload = anImageLoadedCallback;
     }
+}
+
+/**
+ * Return the current question type label
+ *
+ * @returns string
+ */
+export function getQuestionTypeLabel () {
+    const questionType = store.state.currentQuestion.question_type
+    if(questionType === 'mutiplechoice-multiple') {
+        return questionTypeLabel.multipleSelect
+    }
+    if (questionType === 'mutiplechoice-single') {
+        return questionTypeLabel.singleSelect
+    }
+    if(questionType === 'truefalse') {
+        return questionTypeLabel.trueFalse
+    }
+
+    return ''
 }

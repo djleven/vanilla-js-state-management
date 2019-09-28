@@ -115,7 +115,7 @@ describe(`Test components after questions loaded`, () => {
         },
         Question: {
             textContentOfFirstElement: 'Who died holding a door for Bran Stark to escape?',
-            textContentOfSecondElement: '2 point question'
+            textContentOfSecondElement: `2 point single selection question`
         },
         Answers: {
             textContentOfFirstElement: 'Hodor',
@@ -202,7 +202,7 @@ describe(`Test components after questions loaded 2`, () => {
         },
         Question: {
             textContentOfFirstElement: 'The Queen of Thorns, Olenna Tyrell, is the only Tyrell left alive at the end of Season 6.',
-            textContentOfSecondElement: '3 point question'
+            textContentOfSecondElement: `3 point true / false question`
         },
         Answers: {
             textContentOfFirstElement: 'False',

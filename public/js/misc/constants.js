@@ -17,3 +17,8 @@ export const elementClasses = {
     correct: 'correct',
     incorrect: 'incorrect'
 }
+export const questionTypeLabel = {
+    multipleSelect: 'multiple selection',
+    singleSelect: 'single selection',
+    trueFalse: 'true / false'
+}
