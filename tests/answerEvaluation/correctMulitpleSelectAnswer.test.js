@@ -2,7 +2,7 @@ import {
     loadQuestionTestSetup,
     mountWrapper,
     clickMultipleSelectAnswers,
-    submitMultipleSelectAnswer,
+    submitSelectedAnswer,
     questionElementTexts,
     answerElementTexts,
     scorePointsElementText,
@@ -105,9 +105,9 @@ describe.only(`Multiple Select Correct Answer Evaluation`, () => {
         it(`selected answer input fields are checked`, () => {
 
             for (let answer of possibleRenderedAnswers) {
-                if (answerToSubmit.includes(parseInt(answer.value))) {
+                if (answer.checked) {
 
-                    expect(answer.checked).toBe(true)
+                    expect(answerToSubmit.includes(parseInt(answer.value))).toBe(true)
 
                 }
             }
@@ -129,7 +129,7 @@ describe.only(`Multiple Select Correct Answer Evaluation`, () => {
         describe(`After the answers are submitted`, () => {
 
             beforeAll(() => {
-                submitMultipleSelectAnswer()
+                submitSelectedAnswer()
             })
 
             it(`score texts are accurate`, () => {

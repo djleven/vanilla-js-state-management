@@ -9,18 +9,12 @@ export const answerEvents = {
      * @returns {void}
      */
     evaluateAnswer(event) {
-        let answerGiven
+        const answerGiven = getCheckedCheckboxes()
         let answerIsCorrect = false
 
         const question = store.state.currentQuestion
         const points = question.points
 
-        if (question.question_type === 'mutiplechoice-multiple') {
-            answerGiven = getCheckedCheckboxes()
-
-        } else {
-            answerGiven = event.target.value
-        }
         // if answer given is correct commit points
         if (answerGiven.toString() === question.correct_answer.toString()) {
             store.commit('updateTotalAwardedPoints', points)
@@ -45,8 +39,12 @@ export const answerEvents = {
      * @returns {void}
      */
     checkboxSelectionHandler(event) {
-
-        const answerGiven = getCheckedCheckboxes()
+        const question = store.state.currentQuestion
+        let singleSelectAnswerValue = null;
+        if (question.question_type !== 'mutiplechoice-multiple') {
+            singleSelectAnswerValue = event.target.value;
+        }
+        const answerGiven = getCheckedCheckboxes(singleSelectAnswerValue)
         const submitButton = document.querySelector('button.submit')
 
         // Set the submit button's disabled property depending on if at least one checkbox is checked or not
@@ -72,16 +70,33 @@ export function handleResize () {
 }
 
 /**
- * Get the user's checked checkboxes
+ * Get the user's checked checkbox(es)
+ *
+ * In case of single select, keep only the latest checked checkbox
  *
  * @returns array
  */
-function getCheckedCheckboxes () {
+function getCheckedCheckboxes (singleSelectLatestAnswer) {
     const checkBoxes = document.getElementsByTagName('input')
     let answerGiven = []
 
     for (let checkBox of checkBoxes) {
+
         if (checkBox.checked) {
+            // if we're dealing with a single select and this is a previously checked option
+            if(singleSelectLatestAnswer && singleSelectLatestAnswer !== checkBox.value) {
+
+                // remove the label's selected class (un-highlight option)
+                checkBox.parentElement.classList.toggle('pure-button-primary')
+
+                // uncheck the box
+                checkBox.checked = false
+
+                // move to the next checked box
+                continue
+            }
+
+            // else add it to array of checked boxes
             answerGiven.push(checkBox.value)
         }
     }

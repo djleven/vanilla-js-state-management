@@ -2,6 +2,7 @@ import {
     loadQuestionTestSetup,
     mountWrapper,
     clickSingleSelectAnswer,
+    submitSelectedAnswer,
     questionElementTexts,
     answerElementTexts,
     scorePointsElementText,
@@ -59,7 +60,7 @@ describe(`Single Multiple Select Correct Answer Evaluation`, () => {
 
         loadQuestionTestSetup(quizQuestions)
 
-        possibleRenderedAnswers = document.getElementsByTagName('button')
+        possibleRenderedAnswers = document.getElementsByTagName('input')
     })
 
     describe(`Before the question is answered`, () => {
@@ -77,7 +78,9 @@ describe(`Single Multiple Select Correct Answer Evaluation`, () => {
             expect(parseInt(possibleRenderedAnswers[answer].value))
                 .toBe(quizQuestions[0].possible_answers[answer].a_id)
 
-            expect(possibleRenderedAnswers[answer].innerHTML)
+            const parentLabelElement = possibleRenderedAnswers[answer].parentElement
+
+            expect(parentLabelElement.textContent)
                 .toBe(quizQuestions[0].possible_answers[answer].caption)
         })
 
@@ -94,32 +97,62 @@ describe(`Single Multiple Select Correct Answer Evaluation`, () => {
 
     })
 
-    describe(`After the question is answered`, () => {
+    describe(`After the answer is selected`, () => {
 
         beforeAll(() => {
 
             clickSingleSelectAnswer(answerToSubmit, possibleRenderedAnswers)
+        })
+
+        it(`selected answer input field is checked`, () => {
+
+            for (let answer of possibleRenderedAnswers) {
+                if (answer.checked) {
+
+                    expect(answerToSubmit.toString() === answer.value.toString()).toBe(true)
+
+                }
+            }
+        })
+
+        it(`the question is still displayed, not the correct answer`, () => {
+
+            expect(questionElementTexts(wrapper, 0)).toBe(quizQuestions[0].title)
 
         })
 
-        it(`score texts are accurate`, () => {
+        it(`score texts have not yet changed`, () => {
 
-            expect(scorePointsElementText(wrapper)).toBe(expectedResults.scoreTextAfterClick)
-            expect(scorePercentElementText(wrapper)).toBe(expectedResults.scorePercentageTextAfter)
-
-        })
-
-        it(`the correct answer text is displayed accurately`, () => {
-
-            expect(answerElementTexts(wrapper, 1)).toBe(getCorrectAnswerText())
+            expect(scorePointsElementText(wrapper)).toBe(expectedResults.scoreTextBeforeClick)
+            expect(scorePercentElementText(wrapper)).toBe(expectedResults.scorePercentageTextBefore)
 
         })
 
-        it(`a valid comment text is displayed`, () => {
+        describe(`After the answers are submitted`, () => {
 
-            expect(isValidEvaluationCommentRendered(wrapper, false)).toBe(true)
+            beforeAll(() => {
+                submitSelectedAnswer()
+            })
+
+            it(`score texts are accurate`, () => {
+
+                expect(scorePointsElementText(wrapper)).toBe(expectedResults.scoreTextAfterClick)
+                expect(scorePercentElementText(wrapper)).toBe(expectedResults.scorePercentageTextAfter)
+
+            })
+
+            it(`the correct answer text is displayed accurately`, () => {
+
+                expect(answerElementTexts(wrapper, 1)).toBe(getCorrectAnswerText())
+
+            })
+
+            it(`a valid comment text is displayed`, () => {
+
+                expect(isValidEvaluationCommentRendered(wrapper, false)).toBe(true)
+            })
+
         })
-
     })
 
 })

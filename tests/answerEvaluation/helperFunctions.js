@@ -41,7 +41,7 @@ export function clickMultipleSelectAnswers(answerToSubmit, possibleRenderedAnswe
     }
 }
 
-export function submitMultipleSelectAnswer() {
+export function submitSelectedAnswer() {
 
     document.getElementsByTagName('button')[0].click()
 }
