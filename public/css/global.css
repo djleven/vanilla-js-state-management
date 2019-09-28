@@ -71,6 +71,18 @@ main {
     padding-top: 25px;
     padding-bottom: 25px;
 }
+
+@media
+screen and (max-height: 549px) and (max-width: 768px),
+screen and (max-height: 449px)
+{
+    main {
+        position: unset;
+        top: unset;
+        transform: unset;
+    }
+}
+
 /**
 * Intro 
 */
@@ -133,7 +145,7 @@ main {
 }
 
 .submit {
-    margin: 10px
+    margin: 10px 0
 }
 
 .incorrect {
@@ -169,7 +181,7 @@ https://github.com/pure-css/pure/blob/master/LICENSE.md
     user-select: none;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0 5px;
+    margin: 5px;
 }
 
 /* Firefox: Get rid of the inner focus border */
