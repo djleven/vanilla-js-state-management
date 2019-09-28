@@ -1,5 +1,5 @@
 import store from "../store/index.js";
-import { elementClasses } from '../helpers/constants.js'
+import { elementClasses } from './/constants.js'
 
 export const answerEvents = {
     /**

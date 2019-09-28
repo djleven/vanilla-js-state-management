@@ -1,5 +1,5 @@
 import store from './store/index.js';
-import { handleResize } from './helpers/eventHandlers.js';
+import { handleResize } from './misc/eventHandlers.js';
 
 import BgImage from "./components/bgImage.js";
 import Header from "./components/header.js";
