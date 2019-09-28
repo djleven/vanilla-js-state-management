@@ -1,6 +1,7 @@
 import Component from '../lib/component.js'
 import store from '../store/index.js'
 import { answerEvents } from '../helpers/eventHandlers.js';
+import { elementClasses } from '../helpers/constants.js'
 
 export default class Answers extends Component {
 
@@ -25,7 +26,7 @@ export default class Answers extends Component {
             let newlabel = document.createElement("label")
             let element = document.createElement('input')
             newlabel.innerHTML = question.possible_answers[index].caption
-            newlabel.className ='pure-button'
+            newlabel.className = elementClasses.buttonInput
             element.onclick = answerEvents.checkboxSelectionHandler
             element.type = 'checkbox'
             element.style.display = 'none'
@@ -47,7 +48,7 @@ export default class Answers extends Component {
         button.onclick = answerEvents.evaluateAnswer
         button.disabled = true
         button.innerHTML = 'Submit'
-        button.className ='submit pure-button pure-button-primary'
+        button.className = `submit ${elementClasses.buttonInput} ${elementClasses.activeButtonInput}`
         div.appendChild(button);
         this.element.appendChild(div)
     }

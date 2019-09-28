@@ -2,7 +2,11 @@ import store from '../../public/js/store/index'
 import App from '../../public/js/App'
 import {fullBodyHtml} from '../mocks/html'
 import {getCorrectAnswerCaptions} from "../../public/js/helpers/misc"
-import { prefixCommentPool, correctAnswerText } from '../../public/js/helpers/constants.js'
+import {
+    prefixCommentPool,
+    correctAnswerText,
+    elementClasses
+} from '../../public/js/helpers/constants.js'
 
 export function loadQuestionTestSetup (quizQuestions) {
 
@@ -71,9 +75,21 @@ export function getCorrectAnswerText() {
     return `${correctAnswerText} ${getCorrectAnswerCaptions().join(', ')}`
 }
 
+export function checkedAnswerLabelHasActiveClass(answer) {
+
+    return answer.parentElement.classList.contains(elementClasses.activeButtonInput)
+}
+
+export function hasAppropriateCorrectAnswerClass(wrapper, isCorrectAnswer = true) {
+
+    const appropriateClass = isCorrectAnswer ? elementClasses.correct : elementClasses.incorrect
+
+    return wrapper.answerComponent.element.children[1].classList.contains(appropriateClass)
+}
+
 export function isValidEvaluationCommentRendered(wrapper, isCorrectAnswer = true) {
 
-    const evaluation = isCorrectAnswer ? 'correct' : 'incorrect'
+    const evaluation = isCorrectAnswer ? elementClasses.correct : elementClasses.incorrect
 
     return prefixCommentPool[evaluation].includes(answerElementTexts(wrapper, 0))
 }

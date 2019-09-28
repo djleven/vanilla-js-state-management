@@ -2,8 +2,11 @@ import Component from '../lib/component.js'
 import store from '../store/index.js'
 
 import { getCorrectAnswerCaptions } from '../helpers/misc.js';
-import { prefixCommentPool, correctAnswerText } from '../helpers/constants.js'
-
+import {
+    prefixCommentPool,
+    correctAnswerText,
+    elementClasses
+} from '../helpers/constants.js'
 
 export default class CorrectAnswer extends Component {
 
@@ -78,7 +81,8 @@ export default class CorrectAnswer extends Component {
         this.element.innerHTML = ''
         // Show the correct answer after submission (during the brief showCorrectAnswer time frame)
         if(store.state.showCorrectAnswer) {
-            const evaluationResult = store.state.score.lastAnswerWasCorrect ? 'correct' : 'incorrect'
+            const evaluationResult =
+                store.state.score.lastAnswerWasCorrect ? elementClasses.correct : elementClasses.incorrect
             this.displayCorrectAnswerPrefix(evaluationResult)
             this.displayCorrectAnswer(evaluationResult)
         }

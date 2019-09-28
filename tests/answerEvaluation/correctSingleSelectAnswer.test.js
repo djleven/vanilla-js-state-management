@@ -2,14 +2,17 @@ import {
     loadQuestionTestSetup,
     mountWrapper,
     clickSingleSelectAnswer,
+    checkedAnswerLabelHasActiveClass,
     submitSelectedAnswer,
     questionElementTexts,
     answerElementTexts,
     scorePointsElementText,
     scorePercentElementText,
     getCorrectAnswerText,
+    hasAppropriateCorrectAnswerClass,
     isValidEvaluationCommentRendered
 } from './helperFunctions.js'
+import {elementClasses} from "../../public/js/helpers/constants";
 
 const quizQuestions = [
     {
@@ -115,6 +118,17 @@ describe(`Single Multiple Select Correct Answer Evaluation`, () => {
             }
         })
 
+        it(`selected answer input label has active class`, () => {
+
+            for (let answer of possibleRenderedAnswers) {
+                if (answer.checked) {
+
+                    expect(checkedAnswerLabelHasActiveClass(answer)).toBe(true)
+
+                }
+            }
+        })
+
         it(`the question is still displayed, not the correct answer`, () => {
 
             expect(questionElementTexts(wrapper, 0)).toBe(quizQuestions[0].title)
@@ -141,9 +155,15 @@ describe(`Single Multiple Select Correct Answer Evaluation`, () => {
 
             })
 
-            it(`the correct answer text is displayed accurately`, () => {
+            it(`the correct answer text is displayed`, () => {
 
                 expect(answerElementTexts(wrapper, 1)).toBe(getCorrectAnswerText())
+
+            })
+
+            it(`the correct answer text has the appropriate class`, () => {
+
+                expect(hasAppropriateCorrectAnswerClass(wrapper, true)).toBe(true)
 
             })
 

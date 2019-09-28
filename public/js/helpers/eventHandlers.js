@@ -1,4 +1,5 @@
 import store from "../store/index.js";
+import { elementClasses } from '../helpers/constants.js'
 
 export const answerEvents = {
     /**
@@ -51,7 +52,7 @@ export const answerEvents = {
         submitButton.disabled = !answerGiven.length
 
         // Toggle the label / button of the selected checkbox
-        event.target.parentElement.classList.toggle('pure-button-primary')
+        event.target.parentElement.classList.toggle(elementClasses.activeButtonInput)
     },
 
     /**
@@ -87,7 +88,7 @@ function getCheckedCheckboxes (singleSelectLatestAnswer) {
             if(singleSelectLatestAnswer && singleSelectLatestAnswer !== checkBox.value) {
 
                 // remove the label's selected class (un-highlight option)
-                checkBox.parentElement.classList.toggle('pure-button-primary')
+                checkBox.parentElement.classList.toggle(elementClasses.activeButtonInput)
 
                 // uncheck the box
                 checkBox.checked = false

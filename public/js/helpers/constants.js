@@ -10,3 +10,10 @@ export const prefixCommentPool = {
 }
 
 export const correctAnswerText = 'The correct answer is'
+
+export const elementClasses = {
+    buttonInput: 'pure-button',
+    activeButtonInput: 'pure-button-primary',
+    correct: 'correct',
+    incorrect: 'incorrect'
+}
