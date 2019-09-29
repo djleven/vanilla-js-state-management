@@ -2,7 +2,7 @@
 
 A data driven vanilla js implementation of reactive components and state management (similar to React / Redux, Vue / Vuex)
 
-###Quiz Requirements
+### Quiz Requirements
 
 - Implementation to be in vanilla javascript with no frameworks used
 
@@ -18,7 +18,7 @@ A data driven vanilla js implementation of reactive components and state managem
  
 ***
 
-###Added goodies
+### Added goodies
 
 - Images to be displayed are done so as a (full-page) background
 
@@ -72,12 +72,12 @@ An in depth tutorial on this is available here [CSS-Tricks tutorial](https://css
 
 ## Demo
 
-You can see the end result [here](https://got.quiz.cinema.ttic.ca/)
+You can see the end result [here](http://got.quiz.cinema.ttic.ca/)
 
 
 ## Installation
 
-- clone the rero
+- clone the repo
 
 `git clone `
 
@@ -102,3 +102,12 @@ You can see the end result [here](https://got.quiz.cinema.ttic.ca/)
 - run tests and generate coverage reports
 
 `npm run testCoverage`
+
+
+Sample test cli output
+
+![npm run test sample output img](http://got.quiz.cinema.ttic.ca/img/sampleTestCli.png)
+
+testCoverage cli output
+
+![npm run testCoverage output img](http://got.quiz.cinema.ttic.ca/img/testCoverageCli.png)
